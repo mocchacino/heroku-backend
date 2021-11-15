@@ -3,26 +3,25 @@ name: Backend
 on: push
 
 jobs:
-  strategy:
-    matrix:
-      node-version: [14]
-
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14]
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Use Node.js ${{matrix.node-version}}
-        uses: actions/setup-node@2
+        uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node-version}}
 
       - name: Add remote to Heroku
-        run: git remote add heroku https://heroku:${{secret.HEROKU_API_KEY}}@git.heroku.com/${{secret.HEROKU_APP_NAME}}
+        run: git remote add heroku https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/${{secrets.HEROKU_APP_NAME}}
 
       - name: Filter shallow
         run: git filter-branch -- --all
-
       - name: Deploy heroku
         run: git push heroku main --force
