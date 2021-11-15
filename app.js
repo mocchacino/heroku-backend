@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(cors);
 
 app.get("/", (req, res) => {
-  res.send("Hai kak Icha");
+  res.status(200).json({ msg: "Hai kak Icha" });
 });
 
 app.listen(port, () => {
