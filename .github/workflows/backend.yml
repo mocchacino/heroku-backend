@@ -1,6 +1,10 @@
 name: Backend
 
-on: push
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
@@ -19,7 +23,7 @@ jobs:
           node-version: ${{matrix.node-version}}
 
       - name: Add remote to Heroku
-        run: git remote add heroku https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/${{secrets.HEROKU_APP_NAME}}
+         run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME}}.git
 
       - name: Filter shallow
         run: git filter-branch -- --all
