@@ -3,10 +3,6 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
-const cors = require("cors");
-
-app.use(cors);
-
 app.get("/", (req, res) => {
   res.status(200).json({ msg: "Hai kak Icha" });
 });
